@@ -15,8 +15,6 @@ RUN curl -fsSL https://ollama.com/install.sh | sh
 
 EXPOSE 11434
 
-RUN ollama serve 
-RUN ollama pull llama3.1
+CMD ["sh", "-c", "ollama pull llama3.1 && ollama serve --port 11434"]
 
-CMD ["ollama", "run", "llama3.1"]
 
