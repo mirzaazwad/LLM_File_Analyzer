@@ -26,38 +26,41 @@ export const useDragAndDrop = () => {
     e.preventDefault();
     e.stopPropagation();
     setDrag(false);
-    const fileDropped = e.dataTransfer.files[0];
-    if (fileDropped) {
-      addFile(fileDropped);
+    const filesDropped = e.dataTransfer.files;
+    const numberOfFiles = filesDropped.length;
+    if(numberOfFiles>0){
+      for(let i=0;i<numberOfFiles;i+=1){
+        const fileDropped = e.dataTransfer.files[i];
+        if(fileDropped){
+          addFile(fileDropped);
+        }
+      }
     }
     setLoading(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
-    const fileInserted = e.target.files?.[0];
-    if (fileInserted) {
-      addFile(fileInserted);
+    const filesInserted = e.target.files;
+    const numberOfFiles = filesInserted.length;
+    if (filesInserted && numberOfFiles>0) {
+      for(let i=0;i<numberOfFiles;i+=1){
+        const fileDropped = e.target.files[i];
+        if(fileDropped){
+          addFile(fileDropped);
+        }
+      }
     }
     setLoading(false);
   };
 
   const addFile = (e: File) => {
     appStore.dispatch(fileActions.clear());
-    const allowedMimeTypes = [
-      "image/jpeg",
-      "image/jpg",
-      "image/png"
-    ];
     try {
       if (e) {
-        if (allowedMimeTypes.includes(e.type)) {
-          appStore.dispatch(fileActions.setFile(e));
-        } else {
-          throw Error("File is not of the image format: jpg, jpeg, png");
-        }
+        appStore.dispatch(fileActions.setFiles(e));
       } else {
-        throw Error("The file you entered could not be attached");
+        throw Error("The files you entered could not be attached");
       }
     } catch (error: any) {
       appStore.dispatch(fileActions.setFileError(error.message));

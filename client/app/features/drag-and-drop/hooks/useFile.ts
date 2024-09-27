@@ -4,19 +4,19 @@ import { fileSizeCompute } from "@/app/utils/misc/fileSizeCompute";
 import { useEffect, useState } from "react";
 
 export const useFile = () => {
-  const file = useAppSelector((state) => state.file.file);
-  const [filename, setFilename] = useState<string>();
-  const [size, setSize] = useState<number>();
-  const [fileMetric, setFileMetric] = useState<string>();
+  const files = useAppSelector((state) => state.file.files);
+  const [fileInformation, setFileInformation] = useState<string>();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (file) {
+    if (files.length>0) {
       try {
-        setFilename(file.name);
-        const recomputeSizeResult = fileSizeCompute(file.size);
-        setSize(recomputeSizeResult.size);
-        setFileMetric(recomputeSizeResult.metric);
+        const evaluatedInformation = files.map((file:File)=>{
+          console.log("Comes Here",file);
+          const recomputeSizeResult = fileSizeCompute(file.size);
+          return `${file.name} ${recomputeSizeResult.size} ${recomputeSizeResult.metric}`
+        })
+        setFileInformation(evaluatedInformation.join(", "))
         setShow(true);
       } catch (e: any) {
         appStore.dispatch(fileActions.clear());
@@ -26,7 +26,7 @@ export const useFile = () => {
     } else {
       setShow(false);
     }
-  }, [file]);
+  }, [files]);
 
-  return { show, filename, size, fileMetric };
+  return { show, fileInformation };
 };

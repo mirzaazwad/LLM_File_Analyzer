@@ -27,8 +27,8 @@ const OCRUploaderCard = ({ title }: IOCRUploaderCard) => {
       {error && <Message type="error">{error}</Message>}
       <div className="w-full flex justify-center items-center">
         <Image
-          src="/favicon.svg"
-          alt="Bkash Logo"
+          src="/logo.png"
+          alt="Logo"
           className={image}
           width={"250"}
           height={"250"}
@@ -40,10 +40,10 @@ const OCRUploaderCard = ({ title }: IOCRUploaderCard) => {
       <form onSubmit={submit.handleSubmit}>
         <div className={CardBody}>
           <DragAndDropFileInput
-            title="Upload Bank Cheque"
-            prompt="Drag an Image here or Click to Upload a file"
-            typeMessage="Upload Image png, jpg or jpeg"
-            uploadImageSrc="/Upload.svg"
+            title="Upload Code File"
+            prompt="Drag a code file or Click to Upload a file"
+            typeMessage="Upload code file in any language"
+            uploadImageSrc="/Upload.jpg"
           />
         </div>
 
@@ -52,6 +52,7 @@ const OCRUploaderCard = ({ title }: IOCRUploaderCard) => {
             className={PrimaryButton}
             type="submit"
             disabled={!file || submit.submitLoading}
+            onClick={submit.handleSubmit}
           >
             <LoadableText
               className={PrimaryLoader}

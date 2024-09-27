@@ -7,4 +7,4 @@ export const CardBody =
 export const CardFooter = "w-full flex justify-end py-3";
 
 export const CardHeader =
-  "w-full flex justify-center items-center text-pink-800 lg:text-3xl md:text-2xl text-xl font-bold";
+  "w-full flex justify-center items-center text-black lg:text-3xl md:text-2xl text-xl font-bold";

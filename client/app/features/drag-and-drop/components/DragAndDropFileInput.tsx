@@ -37,7 +37,7 @@ const DragAndDropFileInput = ({
           <div className={DragAndDropImageCol_1}>
             <Image
               src={uploadImageSrc}
-              alt="upload"
+              alt="Upload Logo"
               className={DragAndDropImage}
               width="100"
               height="100"
@@ -51,17 +51,18 @@ const DragAndDropFileInput = ({
             {state.loading && <IndeterminateProgressBar />}
             <FileInformationDisplay />
             <ErrorDisplay
-              isError={error !== "" && error !== undefined}
-              error={error}
+              isError={error.length>0}
+              error={error.join(", ")}
             />
           </div>
         </div>
         <input
           id="dropzone-file"
           type="file"
-          accept="image/*"
+          accept="*/*"
           className="hidden"
           onChange={events.handleChange}
+          multiple
         />
       </label>
     </div>

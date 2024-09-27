@@ -1,5 +1,5 @@
 export function fileSizeCompute(size: number) {
-  let translatedSize: number = 0;
+  let translatedSize: number = size;
   let metric: string = "B";
   if (size > 1000 * 1000) {
     translatedSize = size / (1000 * 1000);

@@ -1,5 +1,4 @@
 import { Modal } from "rsuite";
-import JSONResponseViewer from "./JSONResponseViewer";
 import { PrimaryButton } from "../../../themes/buttons";
 import { IModalResponse } from "../../../utils/templates/IModalResponse";
 import {
@@ -27,7 +26,7 @@ const ModalResponse = ({ open, closeModal }: IModalResponse) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <JSONResponseViewer className={JSONResponseStyle} />
+          
         </Modal.Body>
         <Modal.Footer className={ModalFooterStyle}>
           <button onClick={closeModal} className={`${PrimaryButton} font-bold`}>

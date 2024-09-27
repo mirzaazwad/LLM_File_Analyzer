@@ -6,9 +6,9 @@ import "rsuite/dist/rsuite.min.css";
 
 
 export const metadata: Metadata = {
-  title: "Bank OCR POC for bKash",
+  title: "Synthetic Data Generator",
   description:
-    "The application is a POC developed for bKash to read bank cheques using an OCR",
+    "This application acts as a synthetic data generator that essentially generates relevant data given a pre-prompt",
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Bank Cheque OCR: POC</title>
+        <title>Synthetic Data Generator using Files</title>
         <link
           rel="icon"
           href="/favicon.svg"

@@ -2,7 +2,7 @@ import { Message } from "rsuite";
 import { useFile } from "../hooks/useFile";
 
 const FileInformationDisplay = () => {
-  const { show, filename, size, fileMetric } = useFile();
+  const { show, fileInformation } = useFile();
 
   if (!show) {
     return <></>;
@@ -10,7 +10,7 @@ const FileInformationDisplay = () => {
 
   return (
     <Message type="success">
-        {filename} {` ${size} ${fileMetric}`}
+        {fileInformation}
     </Message>
   );
 };

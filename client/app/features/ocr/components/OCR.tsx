@@ -7,7 +7,7 @@ import OCRUploaderCard from "./OCRUploaderCard";
 const OCR = () => {
     return ( 
         <Provider store={appStore}>
-            <OCRUploaderCard title="Bank Cheque OCR"/>
+            <OCRUploaderCard title="Synthetic Data Generator using Files"/>
         </Provider>
      );
 }
