@@ -29,13 +29,15 @@ const ModalResponse = ({ open, closeModal }: IModalResponse) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <ul>
           {responses.map((response,index)=>{
             return (
-              <div key={index}>
+              <li key={index}>
                 {response}
-              </div>
+              </li>
             )
           })}
+          </ul>
         </Modal.Body>
         <Modal.Footer className={ModalFooterStyle}>
           <button onClick={closeModal} className={`${PrimaryButton} font-bold`}>
