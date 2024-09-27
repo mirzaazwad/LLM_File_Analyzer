@@ -9,12 +9,15 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libcurl4-openssl-dev \
     python3 \
-    python3-pip
+    python3-pip \
+    nginx
 
 RUN curl -fsSL https://ollama.com/install.sh | sh
 
+RUN mkdir -p /etc/nginx/conf.d
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 10000
 
-CMD ["sh", "-c", "export OLLAMA_HOST=0.0.0.0:10000 && ollama serve && ollama pull llama3.1"]
-
+CMD ["sh", "-c", "export OLLAMA_HOST=0.0.0.0:10000 && ollama serve & nginx -g 'daemon off;'"]
 
