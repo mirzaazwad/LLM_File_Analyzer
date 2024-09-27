@@ -1,8 +1,7 @@
 import { Modal } from "rsuite";
-import { PrimaryButton } from "../../../themes/buttons";
-import { IModalResponse } from "../../../utils/templates/IModalResponse";
+import { PrimaryButton } from "../../themes/buttons";
+import { IModalResponse } from "../../utils/templates/IModalResponse";
 import {
-  JSONResponseStyle,
   ModalFooterStyle,
   ModalHeaderStyle,
   ModalStyle,

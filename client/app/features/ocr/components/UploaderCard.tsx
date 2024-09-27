@@ -10,7 +10,7 @@ import {
   SecondaryButton,
   SecondaryLoader,
 } from "../../../themes/buttons";
-import ModalResponse from "../../modal/components/ModalResponse";
+import ModalResponse from "../../../components/reusables/ModalResponse";
 import Image from "next/image";
 import { image } from "@/app/themes/general";
 import { Card, CardBody, CardFooter, CardHeader } from "@/app/themes/card";
