@@ -15,6 +15,6 @@ RUN curl -fsSL https://ollama.com/install.sh | sh
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "export OLLAMA_HOST=0.0.0.0:10000 && ollama serve && ollama pull llama3.1 && ollama run llama3.1"]
+CMD ["sh", "-c", "export OLLAMA_HOST=0.0.0.0:10000 && ollama serve && ollama pull llama3.1"]
 
 
