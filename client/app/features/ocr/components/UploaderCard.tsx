@@ -38,10 +38,17 @@ const UploaderCard = ({ title }: IUploaderCard) => {
       <ModalResponse open={modal.open} closeModal={modal.closeModal} />
       <div className={CardHeader}>{title}</div>
       <form onSubmit={submit.handleSubmit}>
-      <div className="w-full mx-4 my-6">
-      <label htmlFor="prompt" className="font-bold text-lg mb-4">Prompt</label>
-      <textarea name="prompt" value={prompt.prompt} onChange={(e)=>prompt.setPrompt(e.target.value)} className="w-full px-4 py-2 border border-black rounded-lg" placeholder="Enter Your Prompt to analyze the files..."/>
-      </div>
+        <div className="w-full mx-4 my-6">
+          <label className="font-bold text-lg mb-4">
+            Prompt
+          </label>
+          <textarea
+            value={prompt.prompt}
+            onChange={(e) => prompt.setPrompt(e.target.value)}
+            className="w-full px-4 py-2 border border-black rounded-lg"
+            placeholder="Enter Your Prompt to analyze the files..."
+          />
+        </div>
         <div className={CardBody}>
           <DragAndDropFileInput
             title="Upload File"

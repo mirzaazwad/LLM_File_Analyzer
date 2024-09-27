@@ -36,7 +36,7 @@ export const uploadFile = async (data: IFileUpload) => {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "llm_response.txt";  
+  link.download = `${data.file.name}.txt`;  
   document.body.appendChild(link);
   link.click();  
   link.remove();
