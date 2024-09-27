@@ -19,11 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Synthetic Data Generator using Files</title>
+        <title>LLM File Analyzer</title>
         <link
           rel="icon"
-          href="/favicon.svg"
-          type="image/svg"
+          href="/logo.png"
+          type="image/png"
           sizes="lg"
           className="w-auto h-auto"
           fetchPriority="high"

@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
-import { uploadBankCheck } from "../../../lib/helpers/imageOCRhelper";
+import { uploadFile } from "../../../lib/uploadFileHelper";
 import { appStore, useAppSelector } from "@/app/context/store/redux-store";
 import { fileActions } from "@/app/context/slice/file-slice";
 
-export const useOCR = () => {
+export const useFileUploader = () => {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [resetLoading, setResetLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
   const [open, setOpen] = useState(false);
-  const file = useAppSelector((state) => state.file.file);
+  const files = useAppSelector((state) => state.file.files);
+  const prompt = useAppSelector((state) => state.file.prompt);
+
+  const setPrompt = (value: string) => {
+    appStore.dispatch(fileActions.setPrompt(value));
+  };
 
   const handleErrorMessageDisplay = () => {
     const timer = setTimeout(() => {
@@ -30,13 +35,16 @@ export const useOCR = () => {
     e.preventDefault();
     setSubmitLoading(true);
     setError(undefined);
-    if (!file) {
+    if (!files || files.length === 0) {
       setError("No File Attached to Upload");
       return;
     }
-    await uploadBankCheck({
-      image:file
-    })
+    const filesResponsePromise = await files.map(async (file: File) => {
+      await uploadFile({
+        file: file,
+      });
+    });
+    const filesResponse = await Promise.all(filesResponsePromise)
       .then(() => {
         setOpen(true);
       })
@@ -56,7 +64,7 @@ export const useOCR = () => {
   };
 
   return {
-    file,
+    files,
     submit: {
       handleSubmit,
       submitLoading,
@@ -67,7 +75,11 @@ export const useOCR = () => {
     },
     modal: {
       open,
-      closeModal: ()=>setOpen(false),
+      closeModal: () => setOpen(false),
+    },
+    prompt: {
+      prompt,
+      setPrompt,
     },
     error,
   };

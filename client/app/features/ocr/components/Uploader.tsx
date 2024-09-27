@@ -2,14 +2,14 @@
 
 import { appStore } from "@/app/context/store/redux-store";
 import { Provider } from "react-redux";
-import OCRUploaderCard from "./OCRUploaderCard";
+import UploaderCard from "./UploaderCard";
 
-const OCR = () => {
+const Uploader = () => {
     return ( 
         <Provider store={appStore}>
-            <OCRUploaderCard title="Synthetic Data Generator using Files"/>
+            <UploaderCard title="LLM File Analyzer"/>
         </Provider>
      );
 }
  
-export default OCR;
+export default Uploader;

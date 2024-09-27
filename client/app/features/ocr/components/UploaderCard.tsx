@@ -1,6 +1,6 @@
 "use client";
 
-import { useOCR } from "../hooks/useOCR";
+import { useFileUploader } from "../hooks/useFileUploader";
 import DragAndDropFileInput from "../../drag-and-drop/components/DragAndDropFileInput";
 import { Message } from "rsuite";
 import LoadableText from "../../../components/reusables/LoadableText";
@@ -15,12 +15,12 @@ import Image from "next/image";
 import { image } from "@/app/themes/general";
 import { Card, CardBody, CardFooter, CardHeader } from "@/app/themes/card";
 
-interface IOCRUploaderCard {
+interface IUploaderCard {
   title: string;
 }
 
-const OCRUploaderCard = ({ title }: IOCRUploaderCard) => {
-  const { file, submit, reset, modal, error } = useOCR();
+const UploaderCard = ({ title }: IUploaderCard) => {
+  const { files, prompt, submit, reset, modal, error } = useFileUploader();
 
   return (
     <div className={Card}>
@@ -38,11 +38,15 @@ const OCRUploaderCard = ({ title }: IOCRUploaderCard) => {
       <ModalResponse open={modal.open} closeModal={modal.closeModal} />
       <div className={CardHeader}>{title}</div>
       <form onSubmit={submit.handleSubmit}>
+      <div className="w-full mx-4 my-6">
+      <label htmlFor="prompt" className="font-bold text-lg mb-4">Prompt</label>
+      <textarea name="prompt" value={prompt.prompt} onChange={(e)=>prompt.setPrompt(e.target.value)} className="w-full px-4 py-2 border border-black rounded-lg" placeholder="Enter Your Prompt to analyze the files..."/>
+      </div>
         <div className={CardBody}>
           <DragAndDropFileInput
-            title="Upload Code File"
-            prompt="Drag a code file or Click to Upload a file"
-            typeMessage="Upload code file in any language"
+            title="Upload File"
+            prompt="Drag a File or Click to Upload a file"
+            typeMessage="Upload any file containing text that can be detected as raw text"
             uploadImageSrc="/Upload.jpg"
           />
         </div>
@@ -51,7 +55,7 @@ const OCRUploaderCard = ({ title }: IOCRUploaderCard) => {
           <button
             className={PrimaryButton}
             type="submit"
-            disabled={!file || submit.submitLoading}
+            disabled={files.length === 0 || submit.submitLoading}
             onClick={submit.handleSubmit}
           >
             <LoadableText
@@ -64,7 +68,7 @@ const OCRUploaderCard = ({ title }: IOCRUploaderCard) => {
           <button
             className={SecondaryButton}
             onClick={(e) => reset.handleReset(e)}
-            disabled={!file || reset.resetLoading}
+            disabled={files.length === 0 || reset.resetLoading}
           >
             <LoadableText
               className={SecondaryLoader}
@@ -80,4 +84,4 @@ const OCRUploaderCard = ({ title }: IOCRUploaderCard) => {
   );
 };
 
-export default OCRUploaderCard;
+export default UploaderCard;

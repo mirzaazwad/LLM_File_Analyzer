@@ -12,7 +12,6 @@ export const useFile = () => {
     if (files.length>0) {
       try {
         const evaluatedInformation = files.map((file:File)=>{
-          console.log("Comes Here",file);
           const recomputeSizeResult = fileSizeCompute(file.size);
           return `${file.name} ${recomputeSizeResult.size} ${recomputeSizeResult.metric}`
         })

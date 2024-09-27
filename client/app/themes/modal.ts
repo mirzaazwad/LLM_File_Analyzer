@@ -1,6 +1,6 @@
 export const ModalStyle = "rounded-lg bg-gray-100 z-10 mt-12";
 
-export const ModalHeaderStyle = "w-full bg-pink-600 rounded-t-lg";
+export const ModalHeaderStyle = "w-full bg-black rounded-t-lg";
 
 export const ModalTitleStyle = "w-full px-6 py-4";
 
