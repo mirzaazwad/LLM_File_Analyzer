@@ -1,7 +1,6 @@
 import { IFileUpload } from "@/app/utils/templates/IFileUpload";
 import { appStore } from "@/app/context/store/redux-store";
 import { fileActions } from "@/app/context/slice/file-slice";
-import { IUploader } from "@/app/utils/templates/IUploader";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -19,14 +18,8 @@ export const uploadFile = async (data: IFileUpload) => {
     };
     reader.readAsText(file);
   });
-  const payload: IUploader = {
-    model: "llama3.1",
-    prompt: `${appStore.getState().file.prompt}: ${fileContent}`,
-    stream: false,
-  };
-  const fetchResponse = await fetch(path, {
-    method: "POST",
-    body: JSON.stringify(payload),
+  const fetchResponse = await fetch(`${path}?prompt=${`${appStore.getState().file.prompt}: ${fileContent}`}`, {
+    method: "GET"
   });
   const llmResponse = await fetchResponse.json();
 
