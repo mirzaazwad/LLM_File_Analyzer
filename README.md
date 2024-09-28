@@ -7,6 +7,15 @@ A RAM of around 8GB would suffice, but a GPU would be greatly helpful and a CPU 
 
 Follow the ollama instructions for downloading ollama at: [Ollama Docs](https://ollama.com/download)
 
+After downloading ollama and running it in your local machines, use:
+```
+ollama pull llama3.1
+```
+To get the llama3.1 pre-trained model to use. You can also use it directly on your local machine with:
+```
+ollama run llama3.1
+```
+
 For the nextJS, set an .env.local file in the client directory with the following:
 ```
 NEXT_PUBLIC_BACKEND_URL=http://localhost:11434
