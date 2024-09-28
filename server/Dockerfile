@@ -19,8 +19,5 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 11434
 
-RUN ollama serve
-RUN ollama pull llama3.1
-
-CMD ["sh", "-c", "ollama serve & nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "ollama serve & ollama pull llama3.1 & nginx -g 'daemon off;'"]
 
