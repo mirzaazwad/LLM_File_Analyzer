@@ -17,7 +17,10 @@ RUN curl -fsSL https://ollama.com/install.sh | sh
 RUN mkdir -p /etc/nginx/conf.d
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+RUN ollama serve &
+RUN ollama pull llama3.1 &
+
 EXPOSE 11434
 
-CMD ["sh", "-c", "ollama serve & ollama pull llama3.1 & nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "nginx -g 'daemon off;' & ollama serve"]
 
