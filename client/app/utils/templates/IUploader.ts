@@ -1,5 +1,4 @@
-export interface IUploader{
-    model:string;
-    prompt:string;
-    stream:boolean;
+export interface IUploader {
+  prompt: string;
+  fileContent: string;
 }

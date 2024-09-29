@@ -6,9 +6,10 @@ import { IUploader } from "@/app/utils/templates/IUploader";
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export const uploadFile = async (data: IFileUpload) => {
-  appStore.dispatch(fileActions.clearResponse());
+  try{
+    appStore.dispatch(fileActions.clearResponse());
   const file: File = data.file;
-  const path = `${BACKEND_URL}/api/generate`;
+  const path = `${BACKEND_URL}/ask`;
   const fileContent = await new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -20,19 +21,20 @@ export const uploadFile = async (data: IFileUpload) => {
     reader.readAsText(file);
   });
   const payload: IUploader = {
-    model: "llama3.1",
-    prompt: `${appStore.getState().file.prompt}: ${fileContent}`,
-    stream: false,
+    prompt: encodeURIComponent(`${appStore.getState().file.prompt}`),
+    fileContent: encodeURIComponent(`${fileContent}`),
   };
-  console.log(payload)
   const fetchResponse = await fetch(path, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(payload),
   });
-  const llmResponse = await fetchResponse.json();
+  const llmResponse=await fetchResponse.text();
 
-  appStore.dispatch(fileActions.setResponse(llmResponse.response));
-  const responseText = llmResponse.response;
+  appStore.dispatch(fileActions.setResponse(llmResponse));
+  const responseText = llmResponse;
   const blob = new Blob([responseText], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -42,4 +44,9 @@ export const uploadFile = async (data: IFileUpload) => {
   link.click();  
   link.remove();
   URL.revokeObjectURL(url);
+  }
+  catch(error:any){
+    appStore.dispatch(fileActions.setFileError(error))
+    console.error(error)
+  }
 };

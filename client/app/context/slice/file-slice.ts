@@ -27,7 +27,6 @@ export const fileSlice = createSlice({
     clear: (state) => {
       state.files = [];
       state.fileError = [];
-      state.prompt="",
       state.responses=[];
     },
     setFileError: (state, action: PayloadAction<string>) => {
